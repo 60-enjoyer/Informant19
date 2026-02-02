@@ -1,0 +1,15 @@
+{
+  "agentId" : "Spot_1_server_BD",
+  "hostname" : "DESKTOP-P132D63",
+  "osName" : "Windows",
+  "osVersion" : "11",
+  "architecture" : "amd64",
+  "macAddress" : "02:50:14:46:1a:fa",
+  "totalRam" : 34245730304,
+  "totalDisk" : 8241615406080,
+  "vendor" : "AuthenticAMD",
+  "model" : "AMD Ryzen 5 5500                               ",
+  "physicalCores" : 6,
+  "logicalCores" : 12,
+  "maxFrequency" : -1
+}
