@@ -15,27 +15,31 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         AgentConfig cfg = ConfigLoader.load("agent.conf");
+        Transport trans = new Transport(cfg.serverIp, cfg.serverPort);
 
         File registerFile = new File("register.json");
 
-        Models.Register newReg = RegisterService.collect(cfg.agentId);
+        Models.Register newReg =
+                RegisterService.collect(cfg.agentId, cfg.agentName);
+
         Models.Register oldReg = RegisterCache.load(registerFile);
 
         if (RegisterCache.changed(oldReg, newReg)) {
-            Transport.send(newReg);
+            trans.send(newReg);
             RegisterCache.save(registerFile, newReg);
+            System.out.println("Register sent");
         }
-
 
         while (true) {
             long start = System.currentTimeMillis();
 
-            Models.Metrics m = MetricService.collect();
-            Transport.send(m);
-            Transport.sendMetrics(m);
+            Models.Metrics m = MetricService.collect(cfg.agentId);
+            trans.send(m);
 
             long sleep = cfg.interval - (System.currentTimeMillis() - start);
-            if (sleep > 0) Thread.sleep(sleep);
+            if (sleep > 0) {
+                Thread.sleep(sleep);
+            }
         }
     }
 }

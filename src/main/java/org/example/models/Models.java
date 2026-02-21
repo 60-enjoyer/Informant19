@@ -5,7 +5,8 @@ public class Models {
     /* ===================== FirstStart ===================== */
 
     public static class Register {
-        public String agentId;        // UUID
+        public int agentId;        // UUID
+        public String agentName;
         public String hostname;       // PC_name
 
         public String osName;
@@ -28,6 +29,8 @@ public class Models {
     /* ====================== EverySecond ===================== */
 
     public static class Metrics {
+        public int agentId;
+
         public long timestamp;
 
         // CPU

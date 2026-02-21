@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.models.Models;
 
 import java.io.File;
+import java.util.Objects;
 
 public class RegisterCache {
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -25,7 +26,14 @@ public class RegisterCache {
 
         return a.totalRam != b.totalRam
                 || a.totalDisk != b.totalDisk
-                || !a.model.equals(b.model)
-                || !a.macAddress.equals(b.macAddress);
+                || a.agentId != b.agentId
+                || !Objects.equals(a.agentName, b.agentName)
+                || !safeEquals(a.model, b.model)
+                || !safeEquals(a.macAddress, b.macAddress);
+    }
+
+    private static boolean safeEquals(String a, String b) {
+        if (a == null) return b == null;
+        return a.equals(b);
     }
 }

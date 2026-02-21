@@ -9,11 +9,11 @@ import oshi.hardware.NetworkIF;
 import oshi.software.os.OperatingSystem;
 
 public class RegisterService {
-    public static Models.Register collect(String agentId) {
+    public static Models.Register collect(int agentId, String agentName) {
 
         Models.Register r = new Models.Register();
-
         r.agentId = agentId;
+        r.agentName = agentName;
 
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
